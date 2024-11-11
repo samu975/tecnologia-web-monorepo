@@ -1,0 +1,16 @@
+version: "3.7"
+services: 
+  microservice:
+    container_name: microservice
+    image: microservice:v1
+    build: 
+      context: .
+    ports:
+      - "5000:5000"
+    networks:
+      - proyectos-app
+
+networks:
+  proyectos-app:
+    
+    
