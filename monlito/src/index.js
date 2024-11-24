@@ -14,7 +14,7 @@ import stageController from './controllers/stage.controller.js';
 
 await getConnectionMongoDB();
 const app = express();
-const PORT = 4000;
+const PORT = 4001;
 
 app.use(express.json());
 app.use(cors());
