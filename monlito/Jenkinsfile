@@ -15,7 +15,9 @@ pipeline {
             withCredentials([
               string(credentialsId: 'MONGO_URI', variable: 'MONGO_URI')
             ]) {
-             sh 'docker-compose up -d'
+              dir('monlito') {
+                sh 'docker-compose up -d'
+              }
             }
         }
       }
