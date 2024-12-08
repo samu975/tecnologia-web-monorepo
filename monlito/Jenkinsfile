@@ -30,7 +30,7 @@ pipeline {
                 to: 'safero99@hotmail.com',
                 from: 'samuel.rosero@est.iudigital.edu.co'
             )
-        },
+        }
         failure {
             emailext(
                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
