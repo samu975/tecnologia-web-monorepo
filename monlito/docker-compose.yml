@@ -15,56 +15,6 @@ services:
     networks:
       - proyectos-app
 
-  monolito:
-    container_name: monolito
-    build: 
-      context: .
-      dockerfile: Dockerfile.app
-    ports:
-      - "4001:4001"
-    networks:
-      - proyectos-app
-
-  monolito-2:
-    container_name: monolito-2
-    build: 
-      context: .
-      dockerfile: Dockerfile.app
-    ports:
-      - "4002:4001"
-    networks:
-      - proyectos-app
-
-  monolito-3:
-    container_name: monolito-3
-    build: 
-      context: .
-      dockerfile: Dockerfile.app
-    ports:
-      - "4003:4001"
-    networks:
-      - proyectos-app
-
-  monolito-4:
-    container_name: monolito-4
-    build: 
-      context: .
-      dockerfile: Dockerfile.app
-    ports:
-      - "4004:4001"
-    networks:
-      - proyectos-app
-
-  balanceador-carga:
-    container_name: balanceador-carga
-    build:
-      context: ./src/balancer
-      dockerfile: Dockerfile
-    ports:
-      - "4005:80"
-    networks:
-      - proyectos-app
-
 networks:
   proyectos-app:
 
