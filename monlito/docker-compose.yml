@@ -1,24 +1,17 @@
+version: "3.7"
 services: 
-  jenkins:
-    image: jenkins/jenkins:lts
-    restart: always
-    privileged: true
-    user: root
+   jenkins:
     build:
       context: .
-      dockerfile: Dockerfile.jenkins
-    container_name: jenkins-node
     ports:
-      - "8080:8080"
-      - "50000:50000"
+      - "8081:8080"
     volumes:
-      - '/app:/app'
-      - '/usr/share/fonts:/usr/share/fonts'
-      - '/docker/jenkins/jenkins_home:/var/jenkins_home'
-      - '/etc/localtime:/etc/localtime:ro'
-      - '/var/run/docker.sock:/var/run/docker.sock'
-      - '~/.ssh:/var/jenkins_home/.ssh'
-      - '~/.m2:/root/.m2'
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    user: root
+    restart: always
+    networks:
+      - proyectos-app
 
   monolito:
     container_name: monolito

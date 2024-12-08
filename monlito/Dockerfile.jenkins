@@ -1,16 +1,24 @@
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins
 
 USER root
 
-# install docker cli
-RUN apt-get -y update; apt-get install -y sudo; apt-get install -y git wget
-RUN echo "Jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
-RUN wget http://get.docker.com/builds/Linux/x86_64/docker-latest.tgz
-RUN tar -xvzf docker-latest.tgz
-RUN mv docker/* /usr/bin/
+# Instala las dependencias necesarias para desplegar aplicaciones Node.js
+RUN apt-get update && apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs
+# Instala herramientas adicionales si las necesitas, como yarn o npm globalmente
+#RUN npm install -g yarn
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    apt-get clean
+# Instalar Docker
+RUN apt-get update && \
+    apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" && \
+    apt-get update && \
+    apt-get -y install docker-ce docker-ce-cli containerd.io
+
+# Instalar Docker Compose
+RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose
 
 USER jenkins
