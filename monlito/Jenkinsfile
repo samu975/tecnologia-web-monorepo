@@ -27,7 +27,7 @@ pipeline {
             emailext (
                 subject: "Estado del build: ${currentBuild.currentResult}",
                 body: "Se ha completado el build exitosamente. Puedes consultar los detalles aqui: ${env.BUILD_URL}",
-                to: 'safero99@hotmail.com',
+                to: 'saferoxx215@gmail.com',
                 from: 'samuel.rosero@est.iudigital.edu.co'
             )
         }
@@ -35,7 +35,7 @@ pipeline {
             emailext(
                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Build failed in Jenkins pipeline.\nCheck the console output: ${env.BUILD_URL}",
-                to: 'safero99@hotmail.com'
+                to: 'saferoxx215@gmail.com'
             )
         }
   }
