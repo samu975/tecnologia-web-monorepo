@@ -1,7 +1,21 @@
 services: 
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+    container_name: jenkins-node
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
   monolito:
     container_name: monolito
     image: monolito:v1
+    build: 
+      context: .
+      dockerfile: Dockerfile.app
     ports:
       - "4001"
     networks:
@@ -11,6 +25,9 @@ services:
   monolito-2:
     container_name: monolito-2
     image: monolito:v1
+    build: 
+      context: .
+      dockerfile: Dockerfile.app
     ports:
       - "4001"
     networks:
@@ -20,6 +37,9 @@ services:
   monolito-3:
     container_name: monolito-3
     image: monolito:v1
+    build: 
+      context: .
+      dockerfile: Dockerfile.app
     ports:
       - "4001"
     networks:
@@ -31,6 +51,7 @@ services:
     image: monolito:v1
     build: 
       context: .
+      dockerfile: Dockerfile.app
     ports:
       - "4001"
     networks:
@@ -41,6 +62,7 @@ services:
     container_name: balanceador-carga
     build:
       context: ./src/balancer
+      dockerfile: Dockerfile
     ports:
       - "4002:80"
     networks:
@@ -50,5 +72,8 @@ services:
 
 networks:
   proyectos-app:
+
+volumes:
+  jenkins_home: {}
     
     
