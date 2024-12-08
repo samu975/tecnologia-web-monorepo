@@ -15,9 +15,8 @@ pipeline {
             withCredentials([
               string(credentialsId: 'MONGO_URI', variable: 'MONGO_URI')
             ]) {
-              dir('monlito') {
-                sh 'docker-compose up -d'
-              }
+              def dockerComposeFilePath = 'monlito/docker-compose.yml'
+              sh "docker-compose -f ${dockerComposeFilePath} up -d"
             }
         }
       }
