@@ -12,10 +12,13 @@ services:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - /data/jenkins/:/var/jenkins_home
-      - /usr/bin/docker:/usr/bin/docker
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/libexec/docker/cli-plugins:/usr/libexec/docker/cli-plugins
+      - '/app:/app'
+      - '/usr/share/fonts:/usr/share/fonts'
+      - '/docker/jenkins/jenkins_home:/var/jenkins_home'
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '~/.ssh:/var/jenkins_home/.ssh'
+      - '~/.m2:/root/.m2'
 
   monolito:
     container_name: monolito
