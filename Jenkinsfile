@@ -16,7 +16,6 @@ pipeline {
             string(credentialsId: 'MONGO_URI', variable: 'MONGO_URI')
           ]) {
             try {
-              sh 'docker-compose down -v'
               sh 'docker-compose up -d'
             } catch (Exception e) {
               error "Fallo en el despliegue del contenedor Docker: ${e.message}"
