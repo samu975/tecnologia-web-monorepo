@@ -15,9 +15,12 @@ pipeline {
           withCredentials([
             string(credentialsId: 'MONGO_URI', variable: 'MONGO_URI')
           ]) {
-            def dockerComposeFilePath = 'monlito/docker-compose.yml'
-            sh "docker-compose -f ${dockerComposeFilePath} down -v"
-            sh "docker-compose -f ${dockerComposeFilePath} up -d"
+            try {
+              sh 'docker-compose down -v'
+              sh 'docker-compose up -d'
+            } catch (Exception e) {
+              error "Fallo en el despliegue del contenedor Docker: ${e.message}"
+            }
           }
         }
       }
