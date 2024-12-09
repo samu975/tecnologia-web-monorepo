@@ -2,9 +2,9 @@ services:
   jenkins:
     build:
       context: .
-    image: jenkins-jdk-17
+    image: jenkins/jenkins:lts
     ports:
-      - 8081:8080
+      - 8080:8080
       - 50000:50000
     volumes:
       - jenkins_home:/var/jenkins_home
