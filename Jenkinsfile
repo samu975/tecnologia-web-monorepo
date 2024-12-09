@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  environment {
+    JENKINS_PORT = 8081
+  }
+
   stages {
     
     stage('Clonar repositorio') {
@@ -16,7 +20,7 @@ pipeline {
             string(credentialsId: 'MONGO_URI', variable: 'MONGO_URI')
           ]) {
             try {
-              sh 'docker-compose up -d'
+              sh "docker-compose up -d --build -p my-jenkins"
             } catch (Exception e) {
               error "Fallo en el despliegue del contenedor Docker: ${e.message}"
             }
